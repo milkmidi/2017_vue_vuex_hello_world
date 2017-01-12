@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "plugins": [ "html" ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [ "error", 4 ],
+        "linebreak-style": [ "error", "windows" ],
+        "quotes": [ "error", "single" ],
+        "semi": [ "error", "always" ],
+
+        "no-console": [ "off" ],
+        "no-empty": [ "off" ],
+        "no-undef": [ "off" ],
+
+        "brace-style": [ "warn", "1tbs" ],
+        "camelcase": [ "warn", {
+            "properties": "always"
+        } ],
+        "comma-dangle": [ "warn", "always-multiline" ],
+        "comma-style": [ "warn", "last" ],
+        "func-call-spacing": [ "warn", "never" ],
+        "max-depth": [ "warn", 4 ],
+        "max-len": [ "warn", 80 ],
+        "max-nested-callbacks": [ "warn", 4 ],
+        "new-cap": [ "warn", {
+            "newIsCap": true,
+            "capIsNew": true,
+            "properties": true
+        } ],
+        "new-parens": [ "warn" ],
+        "no-tabs": [ "warn" ],
+        "no-trailing-spaces": [ "warn", {
+            "skipBlankLines": true
+        } ],
+        "no-whitespace-before-property": [ "warn" ],
+        "semi-spacing": [ "warn" ],
+        "space-before-function-paren": [ "warn", "never" ],
+        "space-infix-ops": [ "warn" ],
+
+        "no-duplicate-imports": [ "warn" ],
+        "no-var": [ "warn" ],
+        "object-shorthand": [ "warn", "always" ],
+        "prefer-template": [ "warn" ]
+    }
+}

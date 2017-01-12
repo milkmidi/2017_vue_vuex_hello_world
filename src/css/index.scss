@@ -1,0 +1,40 @@
+.old_browser_wrap{
+	z-index: 9999;
+	position: fixed;
+	background:white;	
+	left: 0;
+	top: 0;
+	width: 100%;
+	border-width:3px;
+	border-style:solid;
+	border-color:red ;
+	padding:20px;
+	p{
+		color:black;
+	}	
+}
+.autoprefixer{
+	display: flex;
+	z-index: 9999;	
+}
+.box{
+	width: 100px;
+}
+.box{
+	width: calc(100% - 20px);
+	height: 100px;
+}
+
+.fade-enter-active, .fade-leave-active{
+	transition: all .5s;
+}
+
+.fade-enter, .fade-leave-active{ 
+	opacity: 0;
+}
+
+.sprite{
+	display:block;
+	background-repeat: no-repeat;
+	background-image:url('~sprite.png');
+}
