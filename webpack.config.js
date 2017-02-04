@@ -43,7 +43,7 @@ var config = {
             path.resolve( 'src' ),
             path.resolve( "node_modules"),
         ],
-        extensions: [ ".js", ".vue", ".scss", ".stylus" ]// 2.x 第一筆不用放空串字
+        extensions: [ ".js", ".vue", ".stylus" ]
     },
     // https://webpack.js.org/configuration/dev-server/#devserver
     devServer: {

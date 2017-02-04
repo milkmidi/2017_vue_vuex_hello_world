@@ -1,7 +1,7 @@
-<style lang="sass" scoped>
-$animation_time : 2.5s;
-$ring_color : #2084a7;
-$ring_bg_color : #8e8f8f;
+<style lang="stylus" scoped>
+$animation_time = 2.5s;
+$ring_color = #2084a7;
+$ring_bg_color = #8e8f8f;
 @keyframes loader-rotate-plane {
 	0% {	transform: perspective(120px) rotateX(0deg) rotateY(0deg);  }
 	50% {	transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);  }

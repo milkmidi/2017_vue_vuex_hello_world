@@ -1,27 +1,21 @@
-<style lang="sass" src="entry.scss">
+<style lang="stylus" src="entry.styl">
 </style>
 
-<template>
+<template lang="pug">
 
-<div id="app">
-
-    <loading></loading>
-    <navigation></navigation>
-    <warning-footer></warning-footer>
-    <p>appData:{{appData}}</p>
-    <main>
-        <transition name="fade" mode="out-in">
-            <router-view class="view"></router-view>
-        </transitoin>
-    </main>
-
-
-</div>
+#app.app
+    Loading
+    .container
+        Navigation
+        transition(name="fade" mode="out-in")
+            router-view
 </template>
 
 <script>
 
 import { mapGetters, mapActions } from 'vuex';
+import Loading from './Loading';
+import Navigation from "./Navigation";
 export default {
     className: "App.vue",
     // props:["appData"],
@@ -41,9 +35,8 @@ export default {
 
     },
     components:{
-        'loading':require('Loading'),
-        'navigation': require('Navigation'),
-        'warning-footer':require("WarningFooter")
+        Loading,
+        Navigation,
     }
 }
 </script>

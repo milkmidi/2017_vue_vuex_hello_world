@@ -1,15 +1,19 @@
-<style lang="sass" src="navigation.scss"></style>
+<style></style>
 
-<template>
-
-<div class="navigation-root">
-    <div class="logo"></div>
-    <router-link to="/index">index</router-link>
-    <router-link to="/Child">child</router-link>
-    <router-link to="/youtube">YoutubeDemo</router-link>
-    <p>{{count}}</p>
-</div>
-
+<template lang="pug">
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+    h1.navbar-brand.mb-0(href='#') milkmidi vuex
+    .navbar-collapse.collapse
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                router-link.nav-link(to="/index") Home
+            li.nav-item
+                router-link.nav-link(to='/about') About
+        ul.navbar-nav.navbar-right
+            li.nav-item
+                span.navbar-text milkmidi 你好
+            li.nav-item
+                button.btn.btn-outline-success.navbar-btn logout
 </template>
 
 <script>

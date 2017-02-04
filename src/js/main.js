@@ -1,4 +1,3 @@
-import "./main.require";
 
 console.log( 'process.env.NODE_ENV', process.env.NODE_ENV );
 
@@ -6,12 +5,7 @@ import store from "./vuex/store";
 import router from './main.router';
 import App from "App.vue";
 
-const ab = 3;
-let a = 3;
-
-
-var v = new Vue( {
-    className: "main.js",
+new Vue( {
     el: '#app',
     store,
     router,
@@ -24,4 +18,4 @@ var v = new Vue( {
     }*/
 });
 
-
+console.log( "foobar".includes( "foo" ) );
