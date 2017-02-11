@@ -1,5 +1,6 @@
 
 console.log( 'process.env.NODE_ENV', process.env.NODE_ENV );
+console.log( '__DEV__', __DEV__ );
 
 import store from "./vuex/store";
 import router from './main.router';
@@ -11,11 +12,5 @@ new Vue( {
     router,
     // components: { 'app': require( 'App' ) },
     // 直接取代 html #app
-    render: h => h( App )
-    // 如果 App 想要吃到 props 的話就用下面的寫法
-    /*render: h => {
-        return h( App, { props: {appData:'fasdfasdfoo'}} );
-    }*/
+    render: h => h( App )    
 });
-
-console.log( "foobar".includes( "foo" ) );

@@ -40,7 +40,7 @@ gulp.task( 'webpack-dev-server', ( cb ) => {
     logDevelopment();
     var host = 'localhost';
     var port = 3000;
-    var URI = `http://${host}:${port}/`;
+    var URI = `http://${host}:${port}/`;    
     process.env.NODE_ENV = 'development';
     var config = require( './webpack.config' );
     // config.devtool = 'cheap-module-eval-source-map'; // 這會抓到 mixin 裡的路徑
@@ -48,7 +48,6 @@ gulp.task( 'webpack-dev-server', ( cb ) => {
     for ( let a in config.entry ) {
         config.entry[ a ].unshift( `webpack-dev-server/client?${URI}` , 'webpack/hot/dev-server' );
     }
-    config.plugins.push( new webpack.HotModuleReplacementPlugin() );
     var server = new WebpackDevServer( webpack( config ), config.devServer );
     server.listen( port, host, ( err  ) => {
         if ( err )

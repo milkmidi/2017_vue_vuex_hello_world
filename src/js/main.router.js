@@ -8,12 +8,11 @@ const router = new VueRouter( {
     routes: [
         { path: '/', component: require( "Index" ) },
         { path: '/index', component: require( "Index" ) },
-        // { path: '/youtube', component: require( "YoutubeDemo" ), meta: { authorization: true } },        
         { path: '/login', component: require( "Login" ) },        
     ]
 });
 
-/*router.beforeEach(( to, from, next ) => {
+router.beforeEach(( to, from, next ) => {
     log( "Router beforeEach " + 'to:' + to.path + ' name:' + to.name + ' from:' + from.path );
     
     if ( to.matched.some( function ( record ) {
@@ -32,6 +31,6 @@ const router = new VueRouter( {
 });
 router.afterEach( route => {
     log( "Router afterEach " + route.path );
-});*/
+});
 
 export default router;

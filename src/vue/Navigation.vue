@@ -11,9 +11,9 @@ nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
                 router-link.nav-link(to='/about') About
         ul.navbar-nav.navbar-right
             li.nav-item
-                span.navbar-text milkmidi 你好
+                span.navbar-text {{userName}}
             li.nav-item
-                button.btn.btn-outline-success.navbar-btn logout
+                router-link.btn.btn-outline-success.navbar-btn(to="/login") {{loginLabel}}
 </template>
 
 <script>
@@ -26,7 +26,10 @@ export default{
         }
     },
     computed:{
-        ...mapGetters(['count'])
+        ...mapGetters(['userName', 'isLogin']),
+        loginLabel(){
+            return this.isLogin ? "logout" : "login"
+        }
     },
     methods:{
 

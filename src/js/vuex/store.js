@@ -1,16 +1,17 @@
 
 const state = {   
-    showLoading: true,
-    count:0
+    showLoading: false,
+    isLogin: false,
+    userName: "",
 };
 
 // vue 裡用 this.$store.commit('showLoading' , true)
 const mutations = {    
     showLoading( state, value ) {
         state.showLoading = value;
-    },
-    count( state, value ) {
-        state.count = value;
+    }, 
+    userName( state, name ) {
+        state.userName = name;
     }
 };
 
@@ -24,20 +25,34 @@ const actions = {
     showLoading( {commit} , value) {        
         commit( 'showLoading',value );
     },
-    count( {commit}, value ) {
-        commit( 'count', value );  
+    login( {commit, state}, value ) {        
+        return new Promise( resolve => {             
+            commit( 'showLoading', true );
+            setTimeout( async () => {                
+                var response = await axios.get( 'api.txt' );
+                var data = response.data;
+                if ( data.status == 'ok' ) {
+                    commit( 'userName', data.name );
+                    // commit( 'isLogin', true );
+                    state.isLogin = true;
+                }
+                resolve( data );
+                commit( 'showLoading', false );
+            }, 1000);          
+        })        
     }
     
 };
 
 /**
     computed:{
-        ...Vuex.mapGetters(['count'])
+        ...Vuex.mapGetters(['showLoading','isLogin','userName'])
     },
  */
 const getters = {  
     showLoading: stat => state.showLoading,
-    count: stat => state.count,
+    isLogin: stat => state.isLogin,
+    userName: stat => state.userName,
 };
 
 
