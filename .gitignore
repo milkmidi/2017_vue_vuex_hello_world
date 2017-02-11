@@ -1,10 +1,10 @@
-node_modules
-_doc
 .sass-cache
+node_modules
+bower_components
+_doc
 doc
 dist
 src/img
-
 *.zip
 *.psd
 *.doc

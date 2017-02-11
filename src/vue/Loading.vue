@@ -58,25 +58,19 @@ $ring_bg_color = #8e8f8f;
     }
 }
 </style>
-<template>
+<template lang="pug">
 
-<transition name="fade" mode="out-in">
-    
-    <div class="loading_wrap" v-show="showLoading">
-        <div class="loader-container">
-            <div class="tp-loader">
-                <div class="ring"></div>
-            </div>
-        </div>
-    </div>
-</transition>
+transition(name='fade', mode='out-in')
+    .loading_wrap(v-show='showLoading')
+        .loader-container
+            .tp-loader
+                .ring
 
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default{
-    className:"Loading.vue",
     computed: {
         ...mapGetters([
             'showLoading'

@@ -105,7 +105,8 @@ config.module = {
             test: /\.pug$/,
             loader: 'pug-loader',
             options: {
-                pretty: DEV_MODE
+                pretty: DEV_MODE,
+                self: true,
             }
         }
     ]
@@ -116,7 +117,10 @@ config.plugins = [
         { from: 'asset', to: './' },        
     ] ),    
     new HtmlWebpackPlugin({
-        template: 'html/index.template.pug',        
+        template: 'html/index.template.pug',       
+        data: {
+            DEV_MODE:DEV_MODE
+        }
     }),
     new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer',
@@ -147,9 +151,8 @@ config.plugins = [
 ];
 
 
- // 不要將這裡打包到你的 js 檔裡, 可以用 extensions ，然後自己 script src, 或是用 addVendor 的方法，二選一
+ // 不要將這裡打包到你的 js 檔裡,
 config.externals = {
-    'jquery': '$',
     'vue': 'Vue',
     'vuex': 'Vuex',
     'axios': 'axios',

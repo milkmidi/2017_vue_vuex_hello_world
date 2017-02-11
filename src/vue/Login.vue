@@ -12,10 +12,10 @@
                 h1 login
             .form-group
                 label Email
-                input.form-control(type="email") 
+                input.form-control(type="email" , v-model="email") 
             .form-group
                 label Password
-                input.form-control(type="password") 
+                input.form-control(type="password" , v-model="password") 
             button.btn.btn-primary(@click="submitHandler") Submit
 </template>
 
@@ -23,16 +23,17 @@
 export default{
     data(){
         return {
-
+            email:"",
+            password:"",
         }
     },
     methods:{
         ...Vuex.mapActions(['showLoading','login']),
-        submitHandler(){
-            // this.showLoading(true);
-            this.login().then( res =>{
-                
-            });
+        async submitHandler(){
+            var email = this.email;
+            var password = this.password;
+            var res = await this.login({email,password});
+            console.log( res );
         }
     }
 }

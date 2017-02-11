@@ -1,5 +1,4 @@
-<style lang="stylus" src="entry.styl">
-</style>
+<style lang="stylus" src="entry.styl"></style>
 
 <template lang="pug">
 
@@ -9,6 +8,7 @@
         Navigation
         transition(name="fade" mode="out-in")
             router-view
+
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
     methods:{
         ...mapActions(['showLoading']),
     },
-    mounted(){      
+    mounted(){
     },
     components:{
         Loading,

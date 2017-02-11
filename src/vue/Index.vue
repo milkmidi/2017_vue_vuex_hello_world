@@ -10,12 +10,12 @@
         h1.display-3 Hello vuex
         p.lead ...
         p.lead
-            a.btn.btn-primary.btn-lg Learn More
+            a.btn.btn-primary.btn-lg(@click="clickHandler") Learn More
 
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions , mapMutations } from 'vuex';
 export default{
 	className:"Index.vue",
     data(){
@@ -24,13 +24,17 @@ export default{
         }
     },
     computed:{
-        // ...mapGetters(['count'])
     },
     methods:{
-        ...mapActions(['showLoading','count'])
+        ...mapActions(['showLoading']),
+        ...mapMutations(['count']),       
+        clickHandler(){
+            this.count();
+        } 
     },
     mounted(){
-
+        console.log( 123 );
+        console.log( this.$store );
     },
     destroyed(){
 

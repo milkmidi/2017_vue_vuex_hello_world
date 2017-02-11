@@ -1,0 +1,29 @@
+{
+  "name": "2017-vuex-milkmidi-tutorial",
+  "description": "2017 vuex 線上讀書會",
+  "main": "",
+  "authors": [
+    "milkmidi <milkmidi@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "vuex",
+    "webpack",
+    "vue"
+  ],
+  "homepage": "https://github.com/milkmidi/2017_vue_vuex_hello_world",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^2.1.10",
+    "vuex": "^2.1.2",
+    "axios": "^0.15.3",
+    "vue-router": "^2.2.0",
+    "es6-promise": "^4.0.5"
+  }
+}

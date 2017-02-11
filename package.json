@@ -1,20 +1,16 @@
 {
-  "name": "vue-template",
+  "name": "2017-vuex-milkmidi-tutorial",
   "version": "2.0.0",
-  "description": "Medialand Interactive Vue2.x Template with webpack2.x",
-  "author": "milkmidi <milkmidi@medialand.tw>",
-  "homepage": "http://github.medialand.tw",
+  "description": "2017 vuex 線上讀書會",
+  "author": "milkmidi <milkmidi@gmail.com>",
+  "homepage": "http://www.milkmidi.com",
   "readme": "readme",
   "license": "ISC",
   "keywords": [
-    "medialand",
-    "interactive",
+    "vuex",
+    "webpack",
     "vue"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MedialandDev/interactive_project_template.git"
-  },
   "scripts": {
     "d": "gulp d",
     "p": "gulp p"
