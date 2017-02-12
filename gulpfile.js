@@ -44,7 +44,7 @@ gulp.task( 'webpack-dev-server', ( cb ) => {
     process.env.NODE_ENV = 'development';
     var config = require( './webpack.config' );
     // config.devtool = 'cheap-module-eval-source-map'; // 這會抓到 mixin 裡的路徑
-    config.devtool = "inline-source-map";   // 要用這個才會對
+    // config.devtool = "inline-source-map";   // 要用這個才會對
     for ( let a in config.entry ) {
         config.entry[ a ].unshift( `webpack-dev-server/client?${URI}` , 'webpack/hot/dev-server' );
     }
@@ -60,7 +60,7 @@ gulp.task( 'webpack-dev-server', ( cb ) => {
 gulp.task( 'webpack-build',( cb ) => {
     logProduction();
     process.env.NODE_ENV = 'production';
-    var config = require( './webpack.config' );
+    var config = require( './webpack.config' );    
     webpack( config, ( err, stats ) => {
         if ( err ) {
             throw new gutil.PluginError( "webpack", err );

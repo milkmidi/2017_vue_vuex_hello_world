@@ -33,7 +33,14 @@ export default{
             var email = this.email;
             var password = this.password;
             var res = await this.login({email,password});
-            console.log( res );
+            // console.log( res );
+            if( res.status === 'ok'){
+                // console.log(  );
+                var redirect = this.$route.query.redirect || "/";
+                console.log( redirect );
+                this.$router.replace(redirect);
+            }
+
         }
     }
 }

@@ -1,16 +1,21 @@
-<style>
+<style lang="stylus" scoped>
+.index_box
+    background green
 </style>
 
 <template lang="pug">
-.root
-    .page-header    
+.index-root
+    .page-header
         h1 Index Page
             small Subtext for header
     .jumbotron
         h1.display-3 Hello vuex
-        p.lead ...
         p.lead
-            a.btn.btn-primary.btn-lg(@click="clickHandler") Learn More
+            .box BOX
+        p.lead
+            .box.index_box BOX
+        p.lead
+            button.btn.btn-primary.btn-lg(@click="clickHandler") Learn More
 
 </template>
 
@@ -27,14 +32,12 @@ export default{
     },
     methods:{
         ...mapActions(['showLoading']),
-        ...mapMutations(['count']),       
+        ...mapMutations(['count']),
         clickHandler(){
             this.count();
-        } 
+        }
     },
     mounted(){
-        console.log( 123 );
-        console.log( this.$store );
     },
     destroyed(){
 

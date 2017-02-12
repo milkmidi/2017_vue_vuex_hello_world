@@ -6,11 +6,6 @@
 npm i 
 ```
 
-安裝需要的第三方 library
-```
-bower install
-```
-
 -------------------
 開發版(development)
 ```

@@ -3,9 +3,9 @@ var path = require( "path" ),
     webpack = require( 'webpack' ),
     chalk = require( 'chalk' ),
     ScriptExtHtmlWebpackPlugin = require( 'script-ext-html-webpack-plugin' ),
-    copyWebpackPlugin = require( 'copy-webpack-plugin' ),    
+    copyWebpackPlugin = require( 'copy-webpack-plugin' ),
     HtmlWebpackPlugin = require( 'html-webpack-plugin' );
-    
+
 const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
 
@@ -17,12 +17,14 @@ var config = {
         app: [ './js/main.js' ],// 這裡要放 Array , 因為在 gulp 時會動態加入 hotreload 的 js
     },
     output: {
-        filename: "asset/js/[name].js?[hash]",        
-        path: path.resolve( __dirname, './dist' ),        
+        filename: "asset/js/[name].js?[hash]",
+        path: path.resolve( __dirname, './dist' ),
         publicPath: '',
     },
+    devtool:DEV_MODE ? "inline-source-map":  "source-map",
+    
     resolveLoader: {
-        moduleExtensions: [ "-loader" ],
+        moduleExtensions: [ "-loader" ],    // 所有的 webpack loader 都可以縮寫，不用加 -loader 字樣
     },
     resolve: {
         alias: {
@@ -44,14 +46,14 @@ var config = {
         hot: true,
         stats: {    //https://webpack.js.org/configuration/stats/
             colors: true,
-            hash: false, 
+            hash: false,
             version: false,
             timings: true,
-            assets: true, 
+            assets: true,
             chunks: false,
             chunkModules: false,
             modules: false,
-            cached: false, 
+            cached: false,
             reasons: false,
             source: true,
             error: true,
@@ -65,7 +67,7 @@ config.module = {
     rules: [
         {
             test: /\.vue$/,
-            loader: 'vue-loader',
+            loader: 'vue',
             include: path.resolve( 'src/vue' ),
             exclude: /node_modules/,
             options: {
@@ -84,7 +86,7 @@ config.module = {
         },
         {
             test: /\.js$/,
-            loader: 'babel-loader',
+            loader: 'babel',
             include: [
                 path.resolve( 'src/js' ),
                 path.resolve( 'src/lib' )
@@ -94,7 +96,7 @@ config.module = {
         {
             test: /\.(png|jpg|gif|svg|ico)$/,
             include: path.resolve( 'src/img' ),
-            loader: 'url-loader',
+            loader: 'url',
             exclude: /node_modules/,
             options: {
                 limit: 1024,
@@ -103,7 +105,7 @@ config.module = {
         },
         {
             test: /\.pug$/,
-            loader: 'pug-loader',
+            loader: 'pug',
             options: {
                 pretty: DEV_MODE,
                 self: true,
@@ -113,15 +115,18 @@ config.module = {
 };
 
 config.plugins = [
-    copyWebpackPlugin( [    
-        { from: 'asset', to: './' },        
-    ] ),    
+    // copy src/asset 下所有檔案，放到 dist 下
+    copyWebpackPlugin( [
+        { from: 'asset', to: './' },
+    ] ),
+    // 產生 html , 並注入script tag app.js?[hash] 
     new HtmlWebpackPlugin({
-        template: 'html/index.template.pug',       
+        template: 'html/index.template.pug',
         data: {
             DEV_MODE:DEV_MODE
         }
     }),
+    // 注入 script app.js , 並加入 defer 屬性
     new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer',
     }),
@@ -139,19 +144,12 @@ config.plugins = [
                 warnings: false
             }
         }),
-        // optimize module ids by occurence count
-        new webpack.LoaderOptionsPlugin( {
-            test: /\.css$/, // optionally pass test, include and exclude, default affects all loaders
-            minimize: true,
-            debug: false,
-            options: {
-            }
-        })
     ]
 ];
 
 
- // 不要將這裡打包到你的 js 檔裡,
+// 如果寫 js 裡有 import vue from 'Vue', 就排除不要去找 node_modules 裡的套件
+// 通常是掛 cdns 時會這樣寫
 config.externals = {
     'vue': 'Vue',
     'vuex': 'Vuex',

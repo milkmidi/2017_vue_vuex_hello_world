@@ -9,17 +9,25 @@ html
         meta(name="description" content="")
         meta(property="og:title" content="")
         meta(property="og:description" content="")
-        meta(property="og:image" content="img/1200x630.png")
+        meta(property="og:image" content="")
     body
         #app
         if(devMode)
             script(src='//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js')
         else
             script(src='//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js')
+        
         script(src='//cdnjs.cloudflare.com/ajax/libs/vuex/2.1.2/vuex.min.js')
         script(src='//cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.0/vue-router.min.js')
         script(src='//cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js')
         //- IE11 
-        //- script(src='//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js')
-        link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
+        script(src='//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js')
+
+        //- bootstrap4
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+        script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js', integrity='sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n', crossorigin='anonymous')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
+        //- bootstrap4
+
 

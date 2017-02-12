@@ -1,24 +1,23 @@
-import { SHOW_LOADING, USER_NAME , COUNT, IS_LOGIN } from "./mutations.type";
 const state = {   
     showLoading : false,
     isLogin     : false,
     userName    : "",
-    count       :0,
+    count       : 0,
 };
 
 // vue 裡用 this.$store.commit('showLoading' , true)
 // mutation 必須是同步函數, 很重要
 const mutations = {    
-    [IS_LOGIN]( state, value ) {
+    isLogin( state, value ) {
         state.isLogin = value;
     }, 
-    [SHOW_LOADING]( state, value ) {
+    showLoading( state, value ) {
         state.showLoading = value;
     }, 
-    [USER_NAME]( state, name ) {
+    userName( state, name ) {
         state.userName = name;
     },
-    [ COUNT ]( state ) {
+    count( state ) {
         state.count++;
     }
 };
@@ -47,11 +46,11 @@ const actions = {
                 var data = response.data;
                 if ( data.status == 'ok' ) {
                     commit( 'userName', data.name );
-                    // commit( 'isLogin', true );
                     // action 不應該直接修改 state 的值, 
                     // 要使用 commit 的方式呼叫 mutations 去改值
                     // 以下寫法在嚴格模式會發生錯誤
-                    state.isLogin = true;
+                    // state.isLogin = true;
+                    commit( 'isLogin', true );
                 }
                 resolve( data );
                 commit( 'showLoading', false );
@@ -70,6 +69,7 @@ const getters = {
     showLoading: state => state.showLoading,
     isLogin: state => state.isLogin,
     userName: state => state.userName,
+    count: state => state.count,
 };
 
 

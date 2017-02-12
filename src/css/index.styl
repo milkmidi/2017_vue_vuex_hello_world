@@ -1,34 +1,27 @@
-.old_browser_wrap{
-	z-index: 9999;
-	position: fixed;
-	background:white;	
-	left: 0;
-	top: 0;
-	width: 100%;
-	border-width:3px;
-	border-style:solid;
-	border-color:red ;
-	padding:20px;
-	p{
-		color:black;
-	}	
-}
-.autoprefixer{
-	display: flex;
-	z-index: 9999;	
-}
-.box{
-	width: 100px;
-}
-.box{
-	width: calc(100% - 20px);
-	height: 100px;
-}
+html
+	font-size 100%
+	// 10 ÷ 16 × 100% = 62.5%
+	
+.flex
+	display flex
+	z-index 9999
 
-.fade-enter-active, .fade-leave-active{
-	transition: all .5s;
-}
+.box
+	width 100px
+.box
+	width calc(100% - 20px)
+	height 100px
+	line-height @height
+.box 
+	text-align center
+	font-size 4rem
+	background-color red
 
-.fade-enter, .fade-leave-active{ 
-	opacity: 0;
-}
+.fade-enter-active
+.fade-leave-active
+	transition all .5s
+
+
+.fade-enter
+.fade-leave-active
+	opacity 0
