@@ -21,21 +21,18 @@ var config = {
         path: path.resolve( __dirname, './dist' ),
         publicPath: '',
     },
-    devtool:DEV_MODE ? "inline-source-map":  "source-map",
-    
+    // 'cheap-module-eval-source-map'; // 這會抓到 stylus, scss mixin 裡的路徑
+    //  "inline-source-map";   // 要用這個才會對
+    devtool:DEV_MODE ? "inline-source-map":  "source-map",    
     resolveLoader: {
         moduleExtensions: [ "-loader" ],    // 所有的 webpack loader 都可以縮寫，不用加 -loader 字樣
     },
     resolve: {
         alias: {
-            // 'vue$': 'vue/dist/vue.common.js'
         },
         modules:[
-            path.resolve( 'src/vue' ),
-            path.resolve( 'src/html' ),
-            path.resolve( 'src/img' ),
+            path.resolve( 'src/component' ),
             path.resolve( 'src/css' ),
-            path.resolve( 'src/asset' ),
             path.resolve( 'src/js' ),
             path.resolve( 'src' ),
             path.resolve( "node_modules"),
@@ -68,7 +65,7 @@ config.module = {
         {
             test: /\.vue$/,
             loader: 'vue',
-            include: path.resolve( 'src/vue' ),
+            include: path.resolve( 'src/component' ),
             exclude: /node_modules/,
             options: {
                 // https://github.com/vuejs/vue-loader/blob/master/docs/en/features/postcss.md
@@ -107,7 +104,8 @@ config.module = {
             test: /\.pug$/,
             loader: 'pug',
             options: {
-                pretty: DEV_MODE,
+                // pretty: DEV_MODE,
+                pretty:true,
                 self: true,
             }
         }
@@ -115,20 +113,20 @@ config.module = {
 };
 
 config.plugins = [
-    // copy src/asset 下所有檔案，放到 dist 下
+    // copy src/copy 下所有檔案，放到 dist 下
     copyWebpackPlugin( [
-        { from: 'asset', to: './' },
+        { from: 'copy', to: './' },
     ] ),
     // 產生 html , 並注入script tag app.js?[hash] 
     new HtmlWebpackPlugin({
         template: 'html/index.template.pug',
-        data: {
+        data: {     // 傳變數給 .pug 
             DEV_MODE:DEV_MODE
         }
     }),
     // 注入 script app.js , 並加入 defer 屬性
-    new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'defer',
+    new ScriptExtHtmlWebpackPlugin( {        
+        defaultAttribute: 'defer',        
     }),
     new webpack.DefinePlugin( {
         __DEV__: DEV_MODE,

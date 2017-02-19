@@ -1,7 +1,7 @@
 var log = function(value) {
     console.log("%c" + value, 'background: #bdc3c7; color: black; font-size:10px;');
 };
-import store from './vuex/store';
+import store from './store/store';
 
 const router = new VueRouter( {
     // mode: 'history',

@@ -2,7 +2,7 @@
 console.log( 'process.env.NODE_ENV', process.env.NODE_ENV );
 console.log( '__DEV__', __DEV__ );
 
-import store from "./vuex/store";
+import store from "./store/store";
 import router from './main.router';
 import App from "App.vue";
 

@@ -30,28 +30,26 @@ function logProduction() {
     console.log( chalk.bgCyan.white.bold( str ) );
 }
 
-gulp.task( 'rimraf', ( cb )=> {
-    console.log( 'rimraf' );
-    rimraf( './dist', cb );
+gulp.task( 'rimraf', ( cb ) => {    
+    console.log( 'rimraf' );    
+    rimraf( './dist', cb );    
 });
 
 
 gulp.task( 'webpack-dev-server', ( cb ) => {
     logDevelopment();
-    var host = 'localhost';
-    var port = 3000;
-    var URI = `http://${host}:${port}/`;    
+    var HOST = 'localhost';
+    var PORT = 3000;
+    var URI = `http://${HOST}:${PORT}/`;
     process.env.NODE_ENV = 'development';
     var config = require( './webpack.config' );
-    // config.devtool = 'cheap-module-eval-source-map'; // 這會抓到 mixin 裡的路徑
-    // config.devtool = "inline-source-map";   // 要用這個才會對
     for ( let a in config.entry ) {
         config.entry[ a ].unshift( `webpack-dev-server/client?${URI}` , 'webpack/hot/dev-server' );
     }
     var server = new WebpackDevServer( webpack( config ), config.devServer );
-    server.listen( port, host, ( err  ) => {
+    server.listen( PORT, HOST, ( err  ) => {
         if ( err )
-            console.log( err );
+            console.error( err );
         gutil.log( "[webpack-dev-server]", URI );
         cb();
     });
@@ -60,7 +58,7 @@ gulp.task( 'webpack-dev-server', ( cb ) => {
 gulp.task( 'webpack-build',( cb ) => {
     logProduction();
     process.env.NODE_ENV = 'production';
-    var config = require( './webpack.config' );    
+    var config = require( './webpack.config' );
     webpack( config, ( err, stats ) => {
         if ( err ) {
             throw new gutil.PluginError( "webpack", err );

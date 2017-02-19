@@ -10,5 +10,8 @@
 		"node_modules",		
 		"tmp",
 		"dist"
-	]
+	],
+	"include": [
+        "src/js/**/*"
+    ]
 }
