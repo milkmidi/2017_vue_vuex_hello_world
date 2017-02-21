@@ -28,19 +28,27 @@ export default{
         }
     },
     methods:{
-        ...Vuex.mapActions(['showLoading','login']),
+        ...Vuex.mapActions(['login']),
         async submitHandler(){
             var email = this.email;
             var password = this.password;
             var res = await this.login({email,password});
-            // console.log( res );
             if( res.status === 'ok'){
-                // console.log(  );
                 var redirect = this.$route.query.redirect || "/";
                 console.log( redirect );
                 this.$router.replace(redirect);
             }
-
+        },
+        submitHandlerES6(){
+            var email = this.email;
+            var password = this.password;
+            this.login({email,password}).then((res)=>{
+                if( res.status === 'ok'){
+                    var redirect = this.$route.query.redirect || "/";
+                    console.log( redirect );
+                    this.$router.replace(redirect);
+                }
+            })
         }
     }
 }

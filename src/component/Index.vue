@@ -9,7 +9,10 @@
         h1 Index Page
             small Subtext for header
     .jumbotron
+
         h1.display-3 Hello vuex
+        .flex abc
+    
         p.lead
             .box BOX
         p.lead

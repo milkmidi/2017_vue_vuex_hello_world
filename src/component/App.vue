@@ -13,7 +13,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex';
+// import { mapGetters, mapActions } from 'vuex';
 import Loading from './Loading';
 import Navigation from "./Navigation";
 export default {
@@ -22,7 +22,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['showLoading']),
+        // ...mapActions(['showLoading']),
     },
     mounted(){
     },
