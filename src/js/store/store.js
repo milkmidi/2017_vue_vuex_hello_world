@@ -1,25 +1,32 @@
-const state = {   
-    showLoading : false,
-    isLogin     : false,
-    userName    : "",
-    count       : 0,
+/* eslint no-shadow:off */
+import Vuex from 'vuex';
+import Vue from 'vue';
+import axios from 'axios';
+
+Vue.use(Vuex);
+
+const state = {
+  showLoading: false,
+  isLogin: false,
+  userName: '',
+  count: 0,
 };
 
 // vue 裡用 this.$store.commit('showLoading' , true)
 // mutation 必須是同步函數, 很重要
-const mutations = {    
-    isLogin( state, value ) {
-        state.isLogin = value;
-    }, 
-    showLoading( state, value ) {
-        state.showLoading = value;
-    }, 
-    userName( state, name ) {
-        state.userName = name;
-    },
-    count( state ) {
-        state.count++;
-    }
+const mutations = {
+  isLogin(state, value) {
+    state.isLogin = value;
+  },
+  showLoading(state, value) {
+    state.showLoading = value;
+  },
+  userName(state, name) {
+    state.userName = name;
+  },
+  count(state) {
+    state.count += 1;
+  },
 };
 
 /*
@@ -33,31 +40,31 @@ const mutations = {
     Action 可以包含任意異步操作。
     Action 可以非同步，但一定只能 return Promise
 */
-const actions = {   
-    showLoading( {commit} , value) {        
-        commit( 'showLoading',value );
-    },
-    login( {commit, state}, { email , password} ) {        
-        return new Promise( resolve => {             
-            commit( 'showLoading', true );
-            console.log('action login', email , password);
-            setTimeout( async () => {                
-                var response = await axios.get( 'api.txt' );
-                var data = response.data;
-                if ( data.status == 'ok' ) {
-                    commit( 'userName', data.name );
-                    // action 不應該直接修改 state 的值, 
-                    // 要使用 commit 的方式呼叫 mutations 去改值
-                    // 以下寫法在嚴格模式會發生錯誤
-                    // state.isLogin = true;
-                    commit( 'isLogin', true );
-                }
-                resolve( data );
-                commit( 'showLoading', false );
-            }, 1000);          
-        })        
-    }
-    
+const actions = {
+  showLoading({ commit }, value) {
+    commit('showLoading', value);
+  },
+  login({ commit }, { email, password }) {
+    return new Promise((resolve) => {
+      commit('showLoading', true);
+      console.log('action login', email, password);
+      setTimeout(async () => {
+        const response = await axios.get('api.txt');
+        const data = response.data;
+        if (data.status === 'ok') {
+          commit('userName', data.name);
+          // action 不應該直接修改 state 的值, 
+          // 要使用 commit 的方式呼叫 mutations 去改值
+          // 以下寫法在嚴格模式會發生錯誤
+          // state.isLogin = true;
+          commit('isLogin', true);
+        }
+        resolve(data);
+        commit('showLoading', false);
+      }, 1000);
+    });
+  },
+
 };
 
 /**
@@ -65,30 +72,30 @@ const actions = {
         ...Vuex.mapGetters(['showLoading','isLogin','userName'])
     },
  */
-const getters = {  
-    showLoading: state => state.showLoading,
-    isLogin: state => state.isLogin,
-    userName: state => state.userName,
-    count: state => state.count,
+const getters = {
+  showLoading: state => state.showLoading,
+  isLogin: state => state.isLogin,
+  userName: state => state.userName,
+  count: state => state.count,
 };
 
 
 // https://vuex.vuejs.org/en/plugins.html
 // Plugins
-const myPlugin = store => {
-    // called when the store is initialized
-    store.subscribe(( mutation, state ) => {
-        // called after every mutation.
-        console.log( mutation );
-        // The mutation comes in the format of { type, payload }.
-    });
+const myPlugin = (store) => {
+  // called when the store is initialized
+  store.subscribe((mutation) => {
+    // called after every mutation.
+    console.log(mutation);
+    // The mutation comes in the format of { type, payload }.
+  });
 };
 
-export default new Vuex.Store( {
-    plugins: [myPlugin],
-    state,
-    getters,
-    actions,
-    mutations,
-    strict: true,//嚴格模式
+export default new Vuex.Store({
+  plugins: [myPlugin],
+  state,
+  getters,
+  actions,
+  mutations,
+  strict: true, // 嚴格模式
 });
