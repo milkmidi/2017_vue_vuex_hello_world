@@ -10,6 +10,14 @@ const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
 
 console.log(colorFun(`DEV_MODE = ${DEV_MODE} , process.env.NODE_ENV = ${process.env.NODE_ENV}`));
+const toFilename = (name, ext = 'js') => {
+  const units = [name, '.', ext];
+  if (!DEV_MODE) {
+    const hashStr = (ext === 'css' ? '-[contenthash]' : '-[chunkhash]');
+    units.splice(1, 0, hashStr);
+  }
+  return units.join('');
+};
 
 const config = {
   context: path.resolve('src'),
@@ -23,16 +31,17 @@ const config = {
     ],
   },
   output: {
-    filename: 'asset/js/[name].js?[hash]',
+    filename: toFilename('asset/js/[name]'),
+    chunkFilename: toFilename('asset/js/[name]'),
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
   },
   // 'cheap-module-eval-source-map'; // 這會抓到 stylus, scss mixin 裡的路徑
   //  "inline-source-map";   // 要用這個才會對
-  devtool: DEV_MODE ? 'inline-source-map' : 'source-map',
+  devtool: DEV_MODE ? 'inline-source-map' : false,
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.esm.js', // 'vue/dist/vue.common.js' for webpack 1
+      // vue$: 'vue/dist/vue.esm.js',
     },
     modules: [
       path.resolve('src/component'),
@@ -122,7 +131,9 @@ config.plugins = [
   }),
   new webpack.DefinePlugin({
     __DEV__: DEV_MODE,
-    'process.env.NODE_ENV': DEV_MODE ? "'development'" : '"production"',
+    'process.env': {
+      NODE_ENV: JSON.stringify(DEV_MODE ? 'development' : 'production'),
+    },
   }),
   //  http://vue-loader.vuejs.org/en/workflow/production.html
   ...DEV_MODE ? [
