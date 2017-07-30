@@ -74,18 +74,8 @@ config.module = {
       exclude: /node_modules/,
       options: {
         preserveWhitespace: false,
-        extractCSS: true, // easy way, will auto import postcss.config.js
+        extractCSS: !DEV_MODE, // easy way, will auto import postcss.config.js
         stylus: 'stylus-loader',
-        postcss: [
-          require('autoprefixer')({
-            browsers: ['last 5 version', 'iOS >=8', 'Safari >=8'],
-          }),
-          require('cssnano')({
-            zindex: false,
-            calc: false,
-            reduceIdents: false,
-          }),
-        ],
       },
     },
     {
@@ -121,7 +111,7 @@ config.module = {
 config.plugins = [
   new ExtractTextPlugin({
     filename: toFilename('css/app', 'css'),
-    // disable: DEV_MODE,
+    disable: DEV_MODE,
   }),
   // copy src/copy 下所有檔案，放到 dist 下
   copyWebpackPlugin([
