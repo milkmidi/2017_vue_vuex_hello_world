@@ -26,13 +26,13 @@ export default{
   data() {
     return {
     };
-  }, 
+  },
   methods: {
     ...mapActions(['showLoading']),
     ...mapMutations(['count']),
     clickHandler() {
       this.count();
     },
-  }, 
+  },
 };
 </script>

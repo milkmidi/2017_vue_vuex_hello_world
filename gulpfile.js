@@ -49,6 +49,7 @@ gulp.task('webpack-dev-server', (cb) => {
       entry[key].unshift(`webpack-dev-server/client?${URI}`, 'webpack/hot/dev-server');
     }
   });
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
   const server = new WebpackDevServer(webpack(config), config.devServer);
   server.listen(PORT, HOST, (err) => {
     if (err) { console.error(err); }
@@ -61,6 +62,12 @@ gulp.task('webpack-build', (cb) => {
   logProduction();
   process.env.NODE_ENV = 'production';
   const config = require('./webpack.config');
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: { warnings: false },
+    }) // eslint-disable-line
+  );
   webpack(config, (err, stats) => {
     if (err) {
       throw new gutil.PluginError('webpack', err);

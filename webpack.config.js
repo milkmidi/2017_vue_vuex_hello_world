@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const chalk = require('chalk');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -31,8 +32,8 @@ const config = {
     ],
   },
   output: {
-    filename: toFilename('asset/js/[name]'),
-    chunkFilename: toFilename('asset/js/[name]'),
+    filename: toFilename('js/[name]'),
+    chunkFilename: toFilename('js/[name]'),
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
   },
@@ -55,6 +56,7 @@ const config = {
   devServer: {
     hot: true,
     historyApiFallback: true,
+    port: 3000,
     stats: {
       colors: true,
       hash: false,
@@ -71,6 +73,9 @@ config.module = {
       include: path.resolve('src/component'),
       exclude: /node_modules/,
       options: {
+        preserveWhitespace: false,
+        extractCSS: true, // easy way, will auto import postcss.config.js
+        stylus: 'stylus-loader',
         postcss: [
           require('autoprefixer')({
             browsers: ['last 5 version', 'iOS >=8', 'Safari >=8'],
@@ -114,6 +119,10 @@ config.module = {
 };
 
 config.plugins = [
+  new ExtractTextPlugin({
+    filename: toFilename('css/app', 'css'),
+    // disable: DEV_MODE,
+  }),
   // copy src/copy 下所有檔案，放到 dist 下
   copyWebpackPlugin([
     { from: 'copy', to: './' },
@@ -137,14 +146,9 @@ config.plugins = [
   }),
   //  http://vue-loader.vuejs.org/en/workflow/production.html
   ...DEV_MODE ? [
-    new webpack.HotModuleReplacementPlugin(),
+
   ] : [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
+
   ],
 ];
 module.exports = config;
