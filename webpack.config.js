@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
@@ -37,13 +38,8 @@ const config = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
   },
-  // 'cheap-module-eval-source-map'; // 這會抓到 stylus, scss mixin 裡的路徑
-  //  "inline-source-map";   // 要用這個才會對
   devtool: DEV_MODE ? 'inline-source-map' : false,
   resolve: {
-    alias: {
-      // vue$: 'vue/dist/vue.esm.js',
-    },
     modules: [
       path.resolve('src/component'),
       path.resolve('src/css'),
@@ -138,7 +134,10 @@ config.plugins = [
   ...DEV_MODE ? [
 
   ] : [
-
+    new PrerenderSpaPlugin(
+      path.join(__dirname, './dist'),
+      [ '/', '/about', '/login' ]
+    )
   ],
 ];
 module.exports = config;

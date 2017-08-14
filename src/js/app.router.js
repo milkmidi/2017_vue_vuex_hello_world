@@ -1,7 +1,7 @@
 /* eslint global-require:off , no-console:off */
 import VueRouter from 'vue-router';
 import Vue from 'vue';
-import store from './store/store';
+import store from './store';
 
 import Index from '../component/Index.vue';
 
