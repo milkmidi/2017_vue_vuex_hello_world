@@ -1,4 +1,4 @@
-/* eslint global-require:off, no-console:off */
+/* eslint no-console:0 */
 const path = require('path');
 const webpack = require('webpack');
 const chalk = require('chalk');
@@ -136,8 +136,8 @@ config.plugins = [
   ] : [
     new PrerenderSpaPlugin(
       path.join(__dirname, './dist'),
-      [ '/', '/about', '/login' ]
-    )
+      ['/', '/about', '/login'] // eslint-disable-line
+    ),
   ],
 ];
 module.exports = config;
