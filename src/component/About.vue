@@ -2,10 +2,15 @@
 <template lang="pug">
 .about-root
   h1 about
+  p {{userName}}
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+  computed: {
+    ...mapGetters(['userName']),
+  },
 };
 </script>

@@ -22,7 +22,7 @@
 <script>
 import { mapActions, mapMutations } from 'vuex';
 
-export default{
+export default {
   data() {
     return {
     };

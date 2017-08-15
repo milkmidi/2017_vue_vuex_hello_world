@@ -1,9 +1,9 @@
-/* eslint global-require:off , no-console:off */
+/* eslint no-console:off */
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 import store from './store';
 
-import Index from '../component/Index.vue';
+import Main from '../component/Main.vue';
 
 Vue.use(VueRouter);
 const About = () => import(/* webpackChunkName: "About" */'../component/About.vue');
@@ -15,8 +15,7 @@ const log = value => console.log(`%c${value}`, 'background: #bdc3c7; color: blac
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: Index },
-    { path: '/index', component: Index },
+    { path: '/', component: Main },
     { path: '/about', component: About, meta: { authorization: true } },
     { path: '/login', component: Login },
   ],

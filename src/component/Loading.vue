@@ -61,21 +61,18 @@ $ring_bg_color = #8e8f8f;
 <template lang="pug">
 
 transition(name='fade', mode='out-in')
-    .loading_wrap(v-show='showLoading')
-        .loader-container
-            .tp-loader
-                .ring
-
+  .loading_wrap(v-show='showLoading')
+    .loader-container
+      .tp-loader
+        .ring
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
-export default{
+export default {
   computed: {
-    ...mapGetters([
-      'showLoading',
-    ]),
+    ...mapGetters(['showLoading']),
   },
 };
 </script>

@@ -4,9 +4,11 @@ const webpack = require('webpack');
 const chalk = require('chalk');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
@@ -36,7 +38,7 @@ const config = {
     filename: toFilename('js/[name]'),
     chunkFilename: toFilename('js/[name]'),
     path: path.resolve(__dirname, './dist'),
-    publicPath: '',
+    publicPath: '/',
   },
   devtool: DEV_MODE ? 'inline-source-map' : false,
   resolve: {
@@ -49,49 +51,35 @@ const config = {
     ],
     extensions: ['.js'],
   },
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    port: 3000,
-    stats: {
-      colors: true,
-      hash: false,
-      chunks: false,
-      chunkModules: false,
-    },
-  },
 };
 config.module = {
   rules: [
     {
       test: /\.vue$/,
       loader: 'vue-loader',
-      include: path.resolve('src/component'),
-      exclude: /node_modules/,
       options: {
         preserveWhitespace: false,
         extractCSS: !DEV_MODE, // easy way, will auto import postcss.config.js
-        stylus: 'stylus-loader',
+        stylus: 'stylus-loader?paths=src/css',
       },
+      include: path.resolve('src/component'),
+      exclude: /node_modules/,
     },
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [
-        path.resolve('src/js'),
-        path.resolve('src/lib'),
-      ],
+      include: path.resolve('src/js'),
       exclude: /node_modules/,
     },
     {
       test: /\.(png|jpg|gif|svg|ico)$/,
-      include: path.resolve('src/img'),
       loader: 'url-loader',
-      exclude: /node_modules/,
       options: {
         limit: 1024,
         name: 'asset/[path][name].[ext]?[hash:8]',
       },
+      include: path.resolve('src/img'),
+      exclude: /node_modules/,
     },
     {
       test: /\.pug$/,
@@ -100,6 +88,7 @@ config.module = {
         pretty: true,
         self: true,
       },
+      exclude: /node_modules/,
     },
   ],
 };
@@ -125,19 +114,32 @@ config.plugins = [
     defaultAttribute: 'defer',
   }),
   new webpack.DefinePlugin({
-    __DEV__: DEV_MODE,
     'process.env': {
       NODE_ENV: JSON.stringify(DEV_MODE ? 'development' : 'production'),
     },
   }),
   //  http://vue-loader.vuejs.org/en/workflow/production.html
   ...DEV_MODE ? [
-
+    new FriendlyErrorsPlugin(),
   ] : [
+    new CleanWebpackPlugin('./dist'),
     new PrerenderSpaPlugin(
       path.join(__dirname, './dist'),
       ['/', '/about', '/login'] // eslint-disable-line
     ),
   ],
 ];
+
+config.devServer = {
+  hot: true,
+  historyApiFallback: true,
+  port: 3000,
+  noInfo: true,
+  stats: {
+    colors: true,
+    hash: false,
+    chunks: false,
+    chunkModules: false,
+  },
+};
 module.exports = config;

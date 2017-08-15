@@ -1,4 +1,4 @@
-/* eslint no-shadow:off */
+/* eslint no-shadow:0, no-param-reassign:0 */
 import Vuex from 'vuex';
 import Vue from 'vue';
 import axios from 'axios';
@@ -30,15 +30,14 @@ const mutations = {
 };
 
 /*
-    vue 裡用 this.$store.dispatch('showLoading' , true)
-    methods(){
-        ...Vuex.mapActions(['showLoading','count']),
-    }
-
-    Action 類似於 mutation，不同在於：
-    Action 提交的是 mutation，而不是直接變更狀態。
-    Action 可以包含任意異步操作。
-    Action 可以非同步，但一定只能 return Promise
+vue 裡用 this.$store.dispatch('showLoading' , true)
+methods(){
+  ...Vuex.mapActions(['showLoading','count']),
+}
+Action 類似於 mutation，不同在於：
+Action 提交的是 mutation，而不是直接變更狀態。
+Action 可以包含任意異步操作。
+Action 可以非同步，但一定只能 return Promise
 */
 const actions = {
   showLoading({ commit }, value) {
@@ -49,8 +48,7 @@ const actions = {
       commit('showLoading', true);
       console.log('action login', email, password);
       setTimeout(async () => {
-        const response = await axios.get('api.txt');
-        const data = response.data;
+        const { data } = await axios.get('api.txt');
         if (data.status === 'ok') {
           commit('userName', data.name);
           // action 不應該直接修改 state 的值, 
@@ -68,9 +66,9 @@ const actions = {
 };
 
 /**
-    computed:{
-        ...Vuex.mapGetters(['showLoading','isLogin','userName'])
-    },
+computed:{
+  ...Vuex.mapGetters(['showLoading','isLogin','userName'])
+},
  */
 const getters = {
   showLoading: state => state.showLoading,
@@ -97,5 +95,5 @@ export default new Vuex.Store({
   getters,
   actions,
   mutations,
-  strict: true, // 嚴格模式
+  strict: true,
 });
