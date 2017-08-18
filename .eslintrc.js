@@ -12,13 +12,12 @@ module.exports = {
     'html',
   ],
   globals: {
+    FB: false
   },
   settings: {
     'import/resolver': {
-      webpack: {
-        config: 'webpack.config.js',
-      },
-    },
+      "babel-module": {},
+    }
   },
   rules: {
     'import/no-extraneous-dependencies': 0,

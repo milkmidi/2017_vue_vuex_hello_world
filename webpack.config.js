@@ -62,7 +62,7 @@ config.module = {
         extractCSS: !DEV_MODE, // easy way, will auto import postcss.config.js
         stylus: 'stylus-loader?paths=src/css',
       },
-      include: path.resolve('src/component'),
+      include: path.resolve('src/js/component'),
       exclude: /node_modules/,
     },
     {

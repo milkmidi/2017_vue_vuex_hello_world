@@ -13,10 +13,8 @@
   ],
   "scripts": {
     "start": "cross-env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --hot",
-    "build": "npm run clear && npm run build-",
-    "build-": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
-    "clear": "rimraf ./build",
-    "clear-modules": "rimraf ./node_modules"
+    "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --progress -p --hide-modules",
+    "clear-modules": "./node_modules/.bin/rimraf ./node_modules"
   },
   "repository": {
     "type": "git",
@@ -31,6 +29,7 @@
     "babel-env": "^2.4.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
+    "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-async-generator-functions": "^6.22.0",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
@@ -46,6 +45,7 @@
     "es6-promise": "^4.1.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-html": "^3.0.0",
     "eslint-plugin-import": "^2.6.1",
