@@ -7,8 +7,11 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const PrerenderSpaPlugin = require('prerender-spa-plugin');
+const PrerendererWebpackPlugin = require('prerenderer-webpack-plugin');
+// const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer;
+const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer;
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
@@ -102,6 +105,10 @@ config.plugins = [
   copyWebpackPlugin([
     { from: 'copy', to: './' },
   ]),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor', 'manifest'],
+    minChunks: Infinity,
+  }),
   // 產生 html , 並注入script tag app.js?[hash] 
   new HtmlWebpackPlugin({
     template: 'html/index.template.pug',
@@ -123,10 +130,18 @@ config.plugins = [
     new FriendlyErrorsPlugin(),
   ] : [
     new CleanWebpackPlugin('./dist'),
-    new PrerenderSpaPlugin(
+    new PrerendererWebpackPlugin({
+      staticDir: path.join(__dirname, './dist'),
+      routes: ['/', '/about', '/login'],
+      renderer: new JSDOMRenderer(),
+    }),
+    /* new PrerenderSpaPlugin(
       path.join(__dirname, './dist'),
-      ['/', '/about', '/login'] // eslint-disable-line
-    ),
+      ['/', '/about', '/login'],
+      {
+        captureAfterTime: 10,
+      } // eslint-disable-line
+    ), */
   ],
 ];
 
