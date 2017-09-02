@@ -1,20 +1,21 @@
 {
   "presets": [
-    "env",
+    ["env", {
+      "modules": false,
+      "useBuiltIn": true,
+      "debug": false,
+      "targets": {
+        "browsers": [
+          "> 2%",
+          "last 2 versions",
+          "ie >= 11",
+          "ios 9"
+        ]
+      }
+    }],
     "stage-0"
   ],
   "plugins": [
-    ["transform-runtime", {
-      "helpers": false,
-      "polyfill": false
-    }],
-    ["module-resolver", {
-      "alias": {
-        "~": "./",
-        "@": "./src/js",
-        "component": "./src/js/component",
-        "img": "./src/img"
-      }
-    }]
+    "transform-decorators-legacy"
   ]
 }

@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "baseUrl": "./",
     "paths": {
-      "~/*": ["*"],
+      "~/*": ["src/*"],
       "@/*": ["src/js/*"],
-      "img/*": ["src/img"],
-      "component/*": ["src/js/component"]
+      "img/*": ["src/asset/img/*"],
+      "component/*": ["src/js/component/*"]
     }
   }  
 }

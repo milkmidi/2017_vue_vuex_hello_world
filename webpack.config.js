@@ -8,10 +8,6 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const PrerenderSpaPlugin = require('prerender-spa-plugin');
-const PrerendererWebpackPlugin = require('prerenderer-webpack-plugin');
-// const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer;
-const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer;
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 const colorFun = DEV_MODE ? chalk.black.bgYellow : chalk.bgCyan.white;
@@ -31,6 +27,9 @@ const config = {
   entry: {
     app: ['./js/app.js'],
     vendor: [
+      'babel-runtime/regenerator',
+      'axios',
+      'vue-class-component',
       'es6-promise/auto',
       'vue',
       'vue-router',
@@ -38,10 +37,10 @@ const config = {
     ],
   },
   output: {
-    filename: toFilename('js/[name]'),
-    chunkFilename: toFilename('js/[name]'),
+    filename: toFilename('asset/js/[name]'),
+    chunkFilename: toFilename('asset/js/[name]'),
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/',
+    publicPath: '',
   },
   devtool: DEV_MODE ? 'inline-source-map' : false,
   resolve: {
@@ -49,9 +48,14 @@ const config = {
       path.resolve('src/component'),
       path.resolve('src/css'),
       path.resolve('src/js'),
-      path.resolve('src'),
+      path.resolve('src/asset'),
       path.resolve('node_modules'),
     ],
+    alias: {
+      '~': path.resolve('src'),
+      '@': path.resolve('src/js'),
+      img: path.resolve('src/asset/img'),
+    },
     extensions: ['.js'],
   },
 };
@@ -98,25 +102,23 @@ config.module = {
 
 config.plugins = [
   new ExtractTextPlugin({
-    filename: toFilename('css/app', 'css'),
+    filename: toFilename('asset/css/app', 'css'),
     disable: DEV_MODE,
   }),
-  // copy src/copy 下所有檔案，放到 dist 下
   copyWebpackPlugin([
-    { from: 'copy', to: './' },
+    { from: 'asset/copy', to: './' },
   ]),
   new webpack.optimize.CommonsChunkPlugin({
     names: ['vendor', 'manifest'],
     minChunks: Infinity,
   }),
-  // 產生 html , 並注入script tag app.js?[hash] 
   new HtmlWebpackPlugin({
     template: 'html/index.template.pug',
-    data: { // 傳變數給 .pug 
+    data: {
       DEV_MODE,
     },
   }),
-  // 注入 script app.js , 並加入 defer 屬性
+  new webpack.NamedModulesPlugin(),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
   }),
@@ -130,18 +132,6 @@ config.plugins = [
     new FriendlyErrorsPlugin(),
   ] : [
     new CleanWebpackPlugin('./dist'),
-    new PrerendererWebpackPlugin({
-      staticDir: path.join(__dirname, './dist'),
-      routes: ['/', '/about', '/login'],
-      renderer: new JSDOMRenderer(),
-    }),
-    /* new PrerenderSpaPlugin(
-      path.join(__dirname, './dist'),
-      ['/', '/about', '/login'],
-      {
-        captureAfterTime: 10,
-      } // eslint-disable-line
-    ), */
   ],
 ];
 

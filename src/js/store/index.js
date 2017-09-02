@@ -8,7 +8,7 @@ Vue.use(Vuex);
 const state = {
   showLoading: false,
   isLogin: false,
-  userName: '',
+  userName: 'null',
   count: 0,
 };
 
@@ -26,6 +26,10 @@ const mutations = {
   },
   count(state) {
     state.count += 1;
+  },
+  mutationCount(state, value = 2) {
+    console.log(value);
+    state.count += value;
   },
 };
 
@@ -84,7 +88,7 @@ const myPlugin = (store) => {
   // called when the store is initialized
   store.subscribe((mutation) => {
     // called after every mutation.
-    console.log(mutation);
+    // console.log(mutation);
     // The mutation comes in the format of { type, payload }.
   });
 };

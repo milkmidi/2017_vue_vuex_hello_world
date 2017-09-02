@@ -10,6 +10,8 @@ nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
     ul.navbar-nav.mr-auto
       li.nav-item
         router-link.nav-link(to='/about') About
+      li.nav-item
+        router-link.nav-link(to='/vueClass') vueClass
       ul.navbar-nav.navbar-right
         li.nav-item
           span.navbar-text {{userName}}

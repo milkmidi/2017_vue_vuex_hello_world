@@ -1,13 +1,16 @@
-/* eslint no-console:off */
+/* eslint no-console: 0 */
 import VueRouter from 'vue-router';
 import Vue from 'vue';
+
+import Main from '@/component/Main.vue';
+
 import store from './store';
 
-import Main from './component/Main.vue';
 
 Vue.use(VueRouter);
 const About = () => import(/* webpackChunkName: "About" */'./component/About.vue');
 const Login = () => import(/* webpackChunkName: "Login" */'./component/Login.vue');
+const VueClass = () => import(/* webpackChunkName: "VueClass" */'./component/VueClass.vue');
 
 const log = value => console.log(`%c${value}`, 'background: #bdc3c7; color: black; font-size:10px;');
 
@@ -18,6 +21,7 @@ const router = new VueRouter({
     { path: '/', component: Main },
     { path: '/about', component: About, meta: { authorization: true } },
     { path: '/login', component: Login },
+    { path: '/VueClass', component: VueClass },
   ],
 });
 

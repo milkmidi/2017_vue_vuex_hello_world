@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const webpack = require('webpack');
@@ -8,32 +9,28 @@ const chalk = require('chalk');
 
 function logDevelopment() {
   const str = `
-  ########  ######## ##     ##
-  ##     ## ##       ##     ##
-  ##     ## ##       ##     ##
-  ##     ## ######   ##     ##
-  ##     ## ##        ##   ##
-  ##     ## ##         ## ##
-  ########  ########    ###
-  `;
+  ████████  ████████ ██     ██  
+  ██     ██ ██       ██     ██  
+  ██     ██ ██       ██     ██  
+  ██     ██ ██████   ██     ██  
+  ██     ██ ██        ██   ██   
+  ██     ██ ██         ██ ██    
+  ████████  ████████    ███     `;
   console.log(chalk.black.bgYellow(str));
 }
 function logProduction() {
   const str = `
-  ########  ########   #######
-  ##     ## ##     ## ##     ##
-  ##     ## ##     ## ##     ##
-  ########  ########  ##     ##
-  ##        ##   ##   ##     ##
-  ##        ##    ##  ##     ##
-  ##        ##     ##  #######   `;
+  ████████  ████████   ███████    
+  ██     ██ ██     ██ ██     ██   
+  ██     ██ ██     ██ ██     ██   
+  ████████  ████████  ██     ██   
+  ██        ██   ██   ██     ██   
+  ██        ██    ██  ██     ██   
+  ██        ██     ██  ███████    `;
   console.log(chalk.bgCyan.white.bold(str));
 }
 
-gulp.task('rimraf', (cb) => {
-  console.log('rimraf');
-  rimraf('./dist', cb);
-});
+gulp.task('rimraf', cb => rimraf('./dist', cb));
 
 
 gulp.task('webpack-dev-server', (cb) => {
@@ -63,16 +60,26 @@ gulp.task('webpack-build', (cb) => {
   process.env.NODE_ENV = 'production';
   const config = require('./webpack.config');
   config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: { warnings: false },
-    }) // eslint-disable-line
+    new webpack.optimize.UglifyJsPlugin() // eslint-disable-line
   );
-  webpack(config, (err, stats) => {
+  const compiler = webpack(config);
+  compiler.apply(new webpack.ProgressPlugin());
+  compiler.run((err, stats) => {
     if (err) {
-      throw new gutil.PluginError('webpack', err);
+      throw new gutil.PluginError('webpack:build', err);
     }
-    gutil.log('[webpack]', stats.toString({ colors: true, chunkModules: false }));
+    if (stats.hasErrors()) {
+      console.error(stats.toString('errors-only'));
+      return;
+    }
+    console.log(chalk.bgCyan.white.bold('[webpack:build]'), stats.toString({
+      hash: false,
+      colors: true,
+      children: false,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    }));
     cb();
   });
 });
