@@ -30,6 +30,8 @@ const config = {
       'babel-runtime/regenerator',
       'axios',
       'vue-class-component',
+      'vue-property-decorator',
+      'vuex-class',
       'es6-promise/auto',
       'vue',
       'vue-router',

@@ -28,7 +28,6 @@ const mutations = {
     state.count += 1;
   },
   mutationCount(state, value = 2) {
-    console.log(value);
     state.count += value;
   },
 };
@@ -46,6 +45,9 @@ Action 可以非同步，但一定只能 return Promise
 const actions = {
   showLoading({ commit }, value) {
     commit('showLoading', value);
+  },
+  count({ commit }) {
+    commit('count');
   },
   login({ commit }, { email, password }) {
     return new Promise((resolve) => {

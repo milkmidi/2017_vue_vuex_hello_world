@@ -16,6 +16,7 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    "transform-vue-jsx"
   ]
 }
