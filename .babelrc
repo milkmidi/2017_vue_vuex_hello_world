@@ -1,22 +1,13 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "useBuiltIn": true,
-      "debug": false,
-      "targets": {
-        "browsers": [
-          "> 2%",
-          "last 2 versions",
-          "ie >= 11",
-          "ios 9"
-        ]
-      }
-    }],
+    "env",
+    "react",
     "stage-0"
   ],
   "plugins": [
-    "transform-decorators-legacy",
-    "transform-vue-jsx"
+    "transform-class-properties",
+    "transform-decorators",
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
   ]
 }

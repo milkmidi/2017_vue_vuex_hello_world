@@ -1,6 +1,6 @@
 import Vue from 'vue';
 // import App from '@/component/App.vue';
-import App from '@/component/VueClass.vue';
+import App from '@/container/TestScene';
 
 import store from './store';
 // import router from './app.router';
