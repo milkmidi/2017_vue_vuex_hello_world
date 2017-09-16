@@ -9,11 +9,9 @@
 
 
 export default {
-  data() {
-    return {
-      myVar: 'TestScene',
-    };
-  },
+  data: () => ({
+    myVar: 'TestScene',
+  }),
   methods: {
     clickHandler() {
       console.log('123');

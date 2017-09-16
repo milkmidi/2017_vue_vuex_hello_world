@@ -53,14 +53,13 @@ $ring_bg_color = #8e8f8f
       animation loader-rotate-plane-spinning $animation_time infinite ease-in-out
 
 </style>
-<template lang="pug">
 
+<template lang="pug">
 transition(name='fade', mode='out-in')
   .loading_wrap(v-show='showLoading')
     .loader-container
       .tp-loader
         .ring
-        
 </template>
 
 <script>

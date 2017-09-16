@@ -4,11 +4,11 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 class InnerComponent extends Vue {
-  time = "";
-  mounted(){
-    this.time = "123456";
+  time = '';
+  mounted() {
+    this.time = '123456';
   }
-  click(){
+  click() {
     this.time = Date.now().toString();
     console.log(123);
   }
@@ -24,11 +24,9 @@ class InnerComponent extends Vue {
 }
 
 export default {
-  data() {
-    return {
-      myVar: 'TestJSXScene',
-    };
-  },
+  data: () => ({
+    myVar: 'TestJSXScene',
+  }),
   methods: {
     clickHandler() {
       this.myVar = Date.now().toString();
