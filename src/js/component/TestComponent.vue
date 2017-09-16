@@ -1,15 +1,23 @@
 <template lang="pug">
   .test-root
-    h1 TestScene
+    h1 hi TestScene
+    button(@click="clickHandler") TestSceneButton
     h2 {{myVar}}
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
       myVar: 'TestScene',
     };
+  },
+  methods: {
+    clickHandler() {
+      console.log('123');
+    },
   },
 };
 </script>

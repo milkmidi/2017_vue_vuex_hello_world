@@ -71,7 +71,7 @@ config.module = {
         extractCSS: !DEV_MODE, // easy way, will auto import postcss.config.js
         stylus: 'stylus-loader?paths=src/css',
       },
-      include: path.resolve('src/js/component'),
+      include: path.resolve('src/js'),
       exclude: /node_modules/,
     },
     {
@@ -129,11 +129,11 @@ config.plugins = [
       NODE_ENV: JSON.stringify(DEV_MODE ? 'development' : 'production'),
     },
   }),
+  new CleanWebpackPlugin('./dist'),
   //  http://vue-loader.vuejs.org/en/workflow/production.html
   ...DEV_MODE ? [
     new FriendlyErrorsPlugin(),
   ] : [
-    new CleanWebpackPlugin('./dist'),
   ],
 ];
 

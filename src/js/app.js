@@ -2,7 +2,7 @@ import Vue from 'vue';
 // import App from '@/component/App.vue';
 import App from '@/container/TestScene';
 
-import store from './store';
+// import store from './store';
 // import router from './app.router';
 import './util/init';
 
@@ -10,7 +10,7 @@ import './util/init';
 // Vue.config.devtools = true;
 export default new Vue({
   el: '#app',
-  store,
+  // store,
   // router,
   render: h => h(App),
 });
