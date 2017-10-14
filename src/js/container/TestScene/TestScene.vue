@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import TestComponent from '../../component/TestComponent.vue';
-import TestJSXComponent from '../../component/TestJSXComponent.vue';
+import TestComponent from '@/component/TestComponent.vue';
+import TestJSXComponent from '@/component/TestJSXComponent.vue';
 
 export default {
   components: {

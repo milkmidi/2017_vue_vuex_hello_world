@@ -28,7 +28,7 @@
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-html": "^3.2.1",
     "eslint-plugin-import": "^2.6.1",
-    "webpack-dev-server": "^2.8.2"
+    "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -65,15 +65,15 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.7",
-    "vue": "^2.4.4",
-    "vue-class-component": "^5.0.2",
+    "vue": "^2.5.2",
+    "vue-class-component": "^6.0.0",
     "vue-loader": "^13.0.2",
-    "vue-property-decorator": "^5.3.0",
-    "vue-router": "^2.7.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.3",
-    "vue-template-compiler": "^2.4.2",
-    "vuex": "^2.4.0",
+    "vue-template-compiler": "^2.5.2",
+    "vuex": "^3.0.0",
     "vuex-class": "^0.2.0",
-    "webpack": "^3.6.0"
+    "webpack": "^3.7.1"
   }
 }
