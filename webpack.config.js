@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -41,7 +41,7 @@ const config = {
   output: {
     filename: toFilename('asset/js/[name]'),
     chunkFilename: toFilename('asset/js/[name]'),
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve('dist'),
     publicPath: '',
   },
   devtool: DEV_MODE ? 'inline-source-map' : false,
@@ -107,7 +107,7 @@ config.plugins = [
     filename: toFilename('asset/css/app', 'css'),
     disable: DEV_MODE,
   }),
-  copyWebpackPlugin([
+  new CopyWebpackPlugin([
     { from: 'asset/copy', to: './' },
   ]),
   new webpack.optimize.CommonsChunkPlugin({
@@ -134,6 +134,11 @@ config.plugins = [
   ...DEV_MODE ? [
     new FriendlyErrorsPlugin(),
   ] : [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
   ],
 ];
 

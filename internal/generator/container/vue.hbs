@@ -1,0 +1,38 @@
+<style lang="stylus">
+@require '~css/fun'
+.{{ dashCase name }}-root
+  // display: none
+</style>
+
+<template lang="pug">
+.{{ dashCase name }}-root
+  h1 {{ dashCase name }}
+</template>
+
+<script>
+import Vuex from 'vuex';
+
+export default {
+  $name: '{{ name }}.vue',
+  props: [],
+  data() {
+    return {
+    };
+  },
+  computed: {
+    ...Vuex.mapState([]),
+    ...Vuex.mapGetters([]),
+  },
+  methods: {
+    ...Vuex.mapMutations([]),
+    ...Vuex.mapActions([]),
+  },
+  mounted() {
+  },
+  beforeDestroy() {
+  },
+  components: {
+  },
+};
+</script>
+

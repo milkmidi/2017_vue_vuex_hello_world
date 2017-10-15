@@ -19,5 +19,3 @@ src/img
 *.settings
 *.cfg
 config.rb
-package-lock.json
-yarn.lock

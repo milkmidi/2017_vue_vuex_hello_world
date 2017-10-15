@@ -1,6 +1,6 @@
-<template lang="pug">
+<template lang="pug" >
   .test-root
-    h1 hi TestScene 2
+    h1 hi TestScene 12
     button(@click="clickHandler") TestSceneButton
     h2 {{myVar}}
 </template>
@@ -9,12 +9,13 @@
 
 
 export default {
+  name: 'test-component',
   data: () => ({
     myVar: 'TestScene',
   }),
   methods: {
     clickHandler() {
-      console.log('123');
+      console.log(this.$options.name);
     },
   },
 };

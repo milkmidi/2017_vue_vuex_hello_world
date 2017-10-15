@@ -24,6 +24,7 @@ class InnerComponent extends Vue {
 }
 
 export default {
+  functional: true,
   data: () => ({
     myVar: 'TestJSXScene',
   }),
@@ -35,13 +36,14 @@ export default {
   components: {
     InnerComponent,
   },
-  render() {
+  render(h, context) {
+    console.log(context);
     return (
       <div class="test-jsx-root">
         <h1>Hi JSX</h1>
-        <button onClick={this.clickHandler}>JSXClick</button>
-        <p>{this.myVar}</p>
-        <InnerComponent></InnerComponent>
+        <button >JSXClick</button>
+        <p>myVar:{context.data.myVar}</p>
+        <InnerComponent />
       </div>
     );
   },
@@ -51,4 +53,8 @@ export default {
 <style lang="stylus">
   .test-jsx-root
     background-color red
+  
+  .inner-component
+    background-color white
+    border 2px solid black
 </style>

@@ -1,0 +1,30 @@
+<style lang="stylus">
+@require '~css/fun'
+.{{ dashCase name }}-root
+  // display: none
+</style>
+
+<template lang="pug">
+.{{ dashCase name }}-root
+  h1 {{ dashCase name }}
+</template>
+
+<script>
+export default {
+  $name: '{{ name }}.vue',
+  props: [],
+  data() {
+    return {
+    };
+  },
+  mounted() {
+  },
+  beforeDestroy() {
+  },
+  components: {
+  },
+  methods: {
+  },
+};
+</script>
+
