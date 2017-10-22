@@ -1,10 +1,9 @@
 <script>
 
 const AComponent = () => <h1>Hello World</h1>;
-const BComponent = ({ props, listeners }) => <div onClick={listeners.click}>{props.msg}<AComponent /></div>;
+const BComponent = ({ props, listeners }) => <div onClick={props.click}>{props.msg}<AComponent />{JSON.stringify(listeners)}</div>;
 
 export default {
-  functional: true,
   data() {
     return {
       myVar: 'TestJSXScene',
@@ -25,7 +24,7 @@ export default {
         <h2>1</h2>
         <button >JSXClick</button>
         <p>myVar:{this.myVar}</p>
-        <AComponent msg={'message'} />
+        <BComponent msg='message' click={this.clickHandler} onClick={this.clickHandler} />
       </div>
     );
   },
