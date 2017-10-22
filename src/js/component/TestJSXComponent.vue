@@ -1,49 +1,31 @@
 <script>
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
 
-@Component
-class InnerComponent extends Vue {
-  time = '';
-  mounted() {
-    this.time = '123456';
-  }
-  click() {
-    this.time = Date.now().toString();
-    console.log(123);
-  }
-  render() {
-    return (
-      <div class="inner-component">
-        <p>InnerComponent</p>
-        <p>{this.time}</p>
-        <button class="btn btn-primary" onClick={this.click}>InnerComponent Button</button>
-      </div>
-    );
-  }
-}
+const AComponent = () => <h1>Hello World</h1>;
+const BComponent = ({ props, listeners }) => <div onClick={listeners.click}>{props.msg}<AComponent /></div>;
 
 export default {
   functional: true,
-  data: () => ({
-    myVar: 'TestJSXScene',
-  }),
+  data() {
+    return {
+      myVar: 'TestJSXScene',
+    };
+  },
   methods: {
     clickHandler() {
       this.myVar = Date.now().toString();
     },
   },
   components: {
-    InnerComponent,
+    BComponent,
   },
-  render(h, context) {
-    console.log(context);
+  render() {
     return (
       <div class="test-jsx-root">
         <h1>Hi JSX</h1>
+        <h2>1</h2>
         <button >JSXClick</button>
-        <p>myVar:{context.data.myVar}</p>
-        <InnerComponent />
+        <p>myVar:{this.myVar}</p>
+        <AComponent msg={'message'} />
       </div>
     );
   },
