@@ -10,7 +10,6 @@ class InnerComponent extends Vue {
   }
   click() {
     this.time = Date.now().toString();
-    console.log(123);
   }
   render() {
     return (
@@ -24,25 +23,36 @@ class InnerComponent extends Vue {
 }
 
 export default {
-  functional: true,
+  props: {
+    show: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data: () => ({
     myVar: 'TestJSXScene',
   }),
+
   methods: {
     clickHandler() {
       this.myVar = Date.now().toString();
     },
   },
+  mounted() {
+    console.log('mounted');
+  },
   components: {
     InnerComponent,
   },
-  render(h, context) {
-    console.log(context);
+  render() {
+    if (!this.show) {
+      return null;
+    }
     return (
       <div class="test-jsx-root">
         <h1>Hi JSX</h1>
         <button >JSXClick</button>
-        <p>myVar:{context.data.myVar}</p>
+        <p>myVar:{this.myVar}</p>
         <InnerComponent />
       </div>
     );
