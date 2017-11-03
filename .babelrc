@@ -5,7 +5,10 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-vue-jsx",
-    "transform-decorators-legacy"
+    "transform-object-rest-spread",
+    "transform-decorators-legacy",
+    "jsx-v-model",
+    "jsx-vue-functional",
+    "transform-vue-jsx"
   ]
 }
