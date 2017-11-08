@@ -27,15 +27,15 @@ const config = {
   entry: {
     app: ['./js/app.js'],
     vendor: [
-      'babel-runtime/regenerator',
-      'axios',
-      'vue-class-component',
-      'vue-property-decorator',
-      'vuex-class',
-      'es6-promise/auto',
+      // 'babel-runtime/regenerator',
+      // 'axios',
+      // 'vue-class-component',
+      // 'vue-property-decorator',
+      // 'vuex-class',
+      // 'es6-promise/auto',
       'vue',
-      'vue-router',
-      'vuex',
+      // 'vue-router',
+      // 'vuex',
     ],
   },
   output: {
@@ -120,7 +120,6 @@ config.plugins = [
       DEV_MODE,
     },
   }),
-  new webpack.NamedModulesPlugin(),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
   }),
@@ -129,16 +128,20 @@ config.plugins = [
       NODE_ENV: JSON.stringify(DEV_MODE ? 'development' : 'production'),
     },
   }),
+  new webpack.NamedModulesPlugin(),
   new CleanWebpackPlugin('./dist'),
   //  http://vue-loader.vuejs.org/en/workflow/production.html
   ...DEV_MODE ? [
     new FriendlyErrorsPlugin(),
   ] : [
-    new webpack.optimize.UglifyJsPlugin({
+    new webpack.HashedModuleIdsPlugin({
+      hashDigestLength: 20,
+    }),
+    /* new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
       },
-    }),
+    }), */
   ],
 ];
 

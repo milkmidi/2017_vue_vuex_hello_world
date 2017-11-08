@@ -1,18 +1,23 @@
 module.exports = {
   root: true,
-  extends: ['airbnb-base'],
+  extends: [
+    'airbnb-base'
+  ],
   parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
+    jsx: true
   },
   env: {
     browser: true,
   },
   plugins: [
     'html',
+    'vue-libs',
   ],
   globals: {
-    FB: false
+    FB: false,
+    pug: false,
   },
   settings: {
     'import/resolver': {
@@ -22,6 +27,7 @@ module.exports = {
     },
   },
   rules: {
+    'vue-libs/jsx-uses-vars': 2,
     'class-methods-use-this': 0,
     'global-require': 0,
     'import/prefer-default-export': 0,

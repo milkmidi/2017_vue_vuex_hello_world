@@ -1,7 +1,10 @@
 <script>
 
 const AComponent = () => <h1>Hello World</h1>;
-const BComponent = ({ props, listeners }) => <div onClick={props.click}>{props.msg}<AComponent />{JSON.stringify(listeners)}</div>;
+
+const BComponent = ({ props, listeners }) => (
+  <div onClick={props.click}>{props.msg}<AComponent />{JSON.stringify(listeners)}</div>
+);
 
 export default {
   data() {
@@ -15,7 +18,6 @@ export default {
     },
   },
   components: {
-    BComponent,
   },
   render() {
     return (

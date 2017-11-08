@@ -4,6 +4,7 @@
     "stage-0"
   ],
   "plugins": [
+    "transform-pug-html",
     "jsx-vue-functional",
     "transform-vue-jsx",
     "transform-decorators-legacy"

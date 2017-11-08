@@ -1,14 +1,14 @@
 import Vue from 'vue';
-import App from '@/component/App.vue';
-// import App from '@/container/TestScene';
+// import App from '@/component/App.vue';
+import App from '@/container/TestContainer';
 
-import store from './store';
-import router from './app.router';
-import './util/init';
+// import store from './store';
+// import router from './app.router';
+// import './util/init';
 
 export default new Vue({
   el: '#app',
-  store,
-  router,
+  // store,
+  // router,
   render: h => h(App),
 });
