@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Vue from 'vue';
 
 import Main from '@/component/Main.vue';
+import JSXScene from '@/container/JSXScene';
 
 import store from './store';
 
@@ -11,6 +12,7 @@ Vue.use(VueRouter);
 const About = () => import(/* webpackChunkName: "About" */'./component/About.vue');
 const Login = () => import(/* webpackChunkName: "Login" */'./component/Login.vue');
 const VueClass = () => import(/* webpackChunkName: "VueClass" */'./component/VueClass.vue');
+
 
 const log = value => console.log(`%c${value}`, 'background: #bdc3c7; color: black; font-size:10px;');
 
@@ -22,6 +24,7 @@ const router = new VueRouter({
     { path: '/about', component: About, meta: { authorization: true } },
     { path: '/login', component: Login },
     { path: '/VueClass', component: VueClass },
+    { path: '/jsx', component: JSXScene },
   ],
 });
 

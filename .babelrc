@@ -1,14 +1,13 @@
 {
   "presets": [
-    "env",
-    "react",
+    "es2015",
     "stage-0"
   ],
   "plugins": [
-    "transform-object-rest-spread",
-    "transform-decorators-legacy",
     "jsx-v-model",
     "jsx-vue-functional",
-    "transform-vue-jsx"
+    "transform-vue-jsx",
+    "transform-pug-html",
+    "transform-decorators-legacy"
   ]
 }

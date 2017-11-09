@@ -1,5 +1,3 @@
-<style></style>
-
 <template lang="pug">
 nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
   router-link.navbar-brand.mb-0(to='/') milkmidi vuex {{count}}
@@ -12,6 +10,8 @@ nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
         router-link.nav-link(to='/about') About
       li.nav-item
         router-link.nav-link(to='/vueClass') vueClass
+      li.nav-item
+        router-link.nav-link(to='/jsx') jsx
       ul.navbar-nav.navbar-right
         li.nav-item
           span.navbar-text {{userName}}

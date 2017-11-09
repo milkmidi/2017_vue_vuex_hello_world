@@ -1,6 +1,4 @@
 <script>
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
 
 @Component
 class InnerComponent extends Vue {
@@ -71,6 +69,7 @@ export default {
     return (
       <div class="test-jsx-root">
         <h1>Hi JSX</h1>
+        <h2>1</h2>
         <button >JSXClick</button>
         <div {...{ directives }}></div>
         <p>myVar:{this.myVar}</p>

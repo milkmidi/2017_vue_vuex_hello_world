@@ -1,13 +1,20 @@
 import Vue from 'vue';
 // import App from '@/component/App.vue';
-import App from '@/container/TestScene';
+import App from '@/container/TestContainer';
 
 
 import TestDirective from './directive/TestDirective';
 
 // import store from './store';
 // import router from './app.router';
-import './util/init';
+// import './util/init';
+
+/**
+ * @return {MyObject}
+ */
+export function test() {
+  return {};
+}
 
 TestDirective.install(Vue);
 // Vue.config.debug = process.env.NODE_ENV === 'development';
