@@ -6,6 +6,13 @@ import App from '@/container/TestContainer';
 // import router from './app.router';
 // import './util/init';
 
+/**
+ * @return {MyObject}
+ */
+export function test() {
+  return {};
+}
+
 export default new Vue({
   el: '#app',
   // store,
