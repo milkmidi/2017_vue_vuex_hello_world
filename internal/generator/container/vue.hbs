@@ -1,11 +1,5 @@
-<style lang="stylus">
-@require '~css/fun'
-.{{ dashCase name }}-root
-  // display: none
-</style>
-
 <template lang="pug">
-.{{ dashCase name }}-root
+.{{ dashCase name }}
   h1 {{ dashCase name }}
 </template>
 
@@ -14,11 +8,9 @@ import Vuex from 'vuex';
 
 export default {
   $name: '{{ name }}.vue',
-  props: [],
-  data() {
-    return {
-    };
-  },
+  props: {},
+  data: () => ({
+  }),
   computed: {
     ...Vuex.mapState([]),
     ...Vuex.mapGetters([]),
@@ -36,3 +28,8 @@ export default {
 };
 </script>
 
+<style lang="stylus">
+  @require '~css/index'
+  .{{ dashCase name }}
+    // display: none
+</style>
