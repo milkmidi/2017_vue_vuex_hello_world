@@ -137,8 +137,10 @@ config.plugins = [
     new webpack.HashedModuleIdsPlugin({
       hashDigestLength: 20,
     }),
-    /* new webpack.optimize.UglifyJsPlugin({
-      compress: {
+  /*   new webpack.optimize.UglifyJsPlugin({
+      uglifyOptions: {
+        ie8: false,
+        ecma: 8,
         warnings: false,
       },
     }), */

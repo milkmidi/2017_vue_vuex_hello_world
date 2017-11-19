@@ -9,7 +9,9 @@
 
 <script>
 
-const InnerComponent = ({ props }) => <div class="inner-component">{props.name}</div>;
+const InnerComponent = ({ props }) => (
+  <div class="inner-component">{props.name}</div>
+);
 
 const Component2 = {
   props: ['name'],

@@ -1,11 +1,10 @@
-/* eslint no-shadow:0, no-param-reassign:0 */
 import Vuex from 'vuex';
 import Vue from 'vue';
 import axios from 'axios';
 
 Vue.use(Vuex);
 
-const state = {
+const defaultState = {
   showLoading: false,
   isLogin: false,
   userName: 'null',
@@ -57,7 +56,7 @@ const actions = {
         const { data } = await axios.get('api.txt');
         if (data.status === 'ok') {
           commit('userName', data.name);
-          // action 不應該直接修改 state 的值, 
+          // action 不應該直接修改 state 的值,
           // 要使用 commit 的方式呼叫 mutations 去改值
           // 以下寫法在嚴格模式會發生錯誤
           // state.isLogin = true;
@@ -77,10 +76,10 @@ computed:{
 },
  */
 const getters = {
-  showLoading: state => state.showLoading,
-  isLogin: state => state.isLogin,
-  userName: state => state.userName,
-  count: state => state.count,
+  showLoading: ({ showLoading }) => showLoading,
+  isLogin: ({ isLogin }) => isLogin,
+  userName: ({ userName }) => userName,
+  count: ({ count }) => count,
 };
 
 
@@ -97,7 +96,7 @@ const myPlugin = (store) => {
 
 export default new Vuex.Store({
   plugins: [myPlugin],
-  state,
+  state: defaultState,
   getters,
   actions,
   mutations,

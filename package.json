@@ -13,15 +13,16 @@
   ],
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress -p --hide-modules",
-    "build-dev": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "clear-modules": "rimraf ./node_modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules -p",
+    "build-dev": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/milkmidi/2017_vue_vuex_hello_world.git"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.32",
+    "@babel/preset-env": "^7.0.0-beta.32",
     "axios": "^0.17.0",
     "babel-core": "^6.25.0",
     "babel-env": "^2.4.1",

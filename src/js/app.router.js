@@ -31,7 +31,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   log(`Router beforeEach to: ${to.path} from: ${from.path}`);
   if (to.matched.some(record => record.meta.authorization || false)) {
-    const isLogin = store.state.isLogin;
+    const { isLogin } = store.state;
     if (isLogin) {
       next();
     } else {

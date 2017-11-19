@@ -9,13 +9,6 @@ import TestDirective from './directive/TestDirective';
 // import router from './app.router';
 // import './util/init';
 
-/**
- * @return {MyObject}
- */
-export function test() {
-  return {};
-}
-
 TestDirective.install(Vue);
 // Vue.config.debug = process.env.NODE_ENV === 'development';
 // Vue.config.devtools = true;
